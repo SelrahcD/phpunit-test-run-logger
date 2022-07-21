@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Selrahcd\PhpunitTestRunLogger\SinglePassingTest;
+
 use PHPUnit\Framework\TestCase;
 
 class SomeTest extends TestCase

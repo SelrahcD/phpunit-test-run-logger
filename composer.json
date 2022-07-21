@@ -17,6 +17,11 @@
       "Selrahcd\\PhpunitTestRunLogger\\": "src/"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "Selrahcd\\PhpunitTestRunLogger\\": "tests/"
+    }
+  },
   "authors": [
     {
       "name": "SelrahcD",
