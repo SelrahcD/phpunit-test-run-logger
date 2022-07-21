@@ -1,0 +1,22 @@
+{
+    "name": "selrahcd/phpunit-test-run-logger",
+    "description": "A test run logger for PHPUnit. Records the results of test runs for improving TDD workflow.",
+    "type": "library",
+    "require": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Selrahcd\\PhpunitTestRunLogger\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "SelrahcD",
+            "email": "c.desneuf@gmail.com"
+        }
+    ]
+}
