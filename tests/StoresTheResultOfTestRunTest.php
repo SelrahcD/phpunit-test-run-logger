@@ -38,10 +38,19 @@ class StoresTheResultOfTestRunTest extends TestCase
      */
     private function assertTheCorrectFileIsCreated(string $fixture): void
     {
-        exec(
-            'cd ' . __DIR__ . ' && ' . self::PHPUNIT_BIN . ' -c phpunit-with-test-run-logger.xml fixtures/' . $fixture . '/SomeTest.php'
-        );
+        $this->runATestFile($fixture);
 
         $this->assertFileEquals(__DIR__ . '/Fixtures/' . $fixture . '/expected_logs', __DIR__ . '/test_run_logs');
+    }
+
+    /**
+     * @param string $fixture
+     * @return void
+     */
+    private function runATestFile(string $fixture, string $testFile = 'SomeTest'): void
+    {
+        exec(
+            'cd ' . __DIR__ . ' && ' . self::PHPUNIT_BIN . ' -c phpunit-with-test-run-logger.xml fixtures/' . $fixture . '/' . $testFile . '.php'
+        );
     }
 }
