@@ -19,8 +19,10 @@ class StoresTheResultOfTestRunTest extends TestCase
 
         $this->runATestFile($fixture);
 
-        $this->assertFileEquals(__DIR__ . '/Fixtures/' . $fixture . '/expected_logs', __DIR__ . '/test_run_logs');
-
+        $expectedLogs = <<<LOGS
+PASSING
+LOGS;
+        $this->assertLogFileIs($expectedLogs);
     }
 
     /**
@@ -31,7 +33,11 @@ class StoresTheResultOfTestRunTest extends TestCase
 
         $this->runATestFile($fixture);
 
-        $this->assertFileEquals(__DIR__ . '/Fixtures/' . $fixture . '/expected_logs', __DIR__ . '/test_run_logs');
+        $expectedLogs = <<<LOGS
+FAILING
+LOGS;
+;
+        $this->assertLogFileIs($expectedLogs);
     }
 
     /**
@@ -42,7 +48,11 @@ class StoresTheResultOfTestRunTest extends TestCase
 
         $this->runATestFile($fixture);
 
-        $this->assertFileEquals(__DIR__ . '/Fixtures/' . $fixture . '/expected_logs', __DIR__ . '/test_run_logs');
+        $expectedLogs = <<<LOGS
+FAILING
+LOGS;
+;
+        $this->assertLogFileIs($expectedLogs);
     }
 
 
@@ -55,5 +65,16 @@ class StoresTheResultOfTestRunTest extends TestCase
         exec(
             'cd ' . __DIR__ . ' && ' . self::PHPUNIT_BIN . ' -c phpunit-with-test-run-logger.xml fixtures/' . $fixture . '/' . $testFile . '.php'
         );
+    }
+
+    /**
+     * @param string $expectedLogs
+     * @return void
+     */
+    private function assertLogFileIs(string $expectedLogs): void
+    {
+        $testRunLogsFile = __DIR__ . '/test_run_logs';
+        $testRunLogs = file_get_contents($testRunLogsFile);;
+        $this->assertEquals($expectedLogs, $testRunLogs);
     }
 }
