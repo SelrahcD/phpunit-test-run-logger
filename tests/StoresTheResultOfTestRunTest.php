@@ -15,19 +15,26 @@ class StoresTheResultOfTestRunTest extends TestCase
     * @test
     */
     public function when_passing_in_a_plain_text_file(): void {
-
-        exec('cd ' . __DIR__ . ' && ' . self::PHPUNIT_BIN . ' -c phpunit-with-test-run-logger.xml fixtures/SinglePassingTest/SomeTest.php');
-
-        $this->assertFileEquals(__DIR__ . '/Fixtures/SinglePassingTest/expected_logs', __DIR__ . '/test_run_logs');
+        $this->assertTheCorrectFileIsCreated('SinglePassingTest');
     }
 
     /**
      * @test
      */
     public function when_failing_in_a_plain_text_file(): void {
+        $this->assertTheCorrectFileIsCreated('SingleFailingTest');
+    }
 
-        exec('cd ' . __DIR__ . ' && ' . self::PHPUNIT_BIN . ' -c phpunit-with-test-run-logger.xml fixtures/SingleFailingTest/SomeTest.php');
+    /**
+     * @param string $fixture
+     * @return void
+     */
+    private function assertTheCorrectFileIsCreated(string $fixture): void
+    {
+        exec(
+            'cd ' . __DIR__ . ' && ' . self::PHPUNIT_BIN . ' -c phpunit-with-test-run-logger.xml fixtures/' . $fixture . '/SomeTest.php'
+        );
 
-        $this->assertFileEquals(__DIR__ . '/Fixtures/SingleFailingTest/expected_logs', __DIR__ . '/test_run_logs');
+        $this->assertFileEquals(__DIR__ . '/Fixtures/' . $fixture . '/expected_logs', __DIR__ . '/test_run_logs');
     }
 }
