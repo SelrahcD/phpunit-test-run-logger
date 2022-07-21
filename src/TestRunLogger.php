@@ -15,14 +15,12 @@ final class TestRunLogger implements AfterSuccessfulTestHook, AfterTestFailureHo
 
     public function executeAfterSuccessfulTest(string $test, float $time): void
     {
-        file_put_contents('test_run_logs', 'PASSING');
     }
 
 
     public function executeAfterTestFailure(string $test, string $message, float $time): void
     {
         $this->hasFailingTest = true;
-        file_put_contents('test_run_logs', 'FAILING');
     }
 
     public function executeAfterLastTest(): void
