@@ -15,9 +15,7 @@ class StoresTheResultOfTestRunTest extends TestCase
     * @test
     */
     public function when_passing_in_a_plain_text_file(): void {
-        $fixture = 'SinglePassingTest';
-
-        $this->runATestFile($fixture);
+        $this->runATestFile('SinglePassingTest');
 
         $expectedLogs = <<<LOGS
 PASSING
@@ -29,9 +27,7 @@ LOGS;
      * @test
      */
     public function when_failing_in_a_plain_text_file(): void {
-        $fixture = 'SingleFailingTest';
-
-        $this->runATestFile($fixture);
+        $this->runATestFile('SingleFailingTest');
 
         $expectedLogs = <<<LOGS
 FAILING
@@ -44,9 +40,7 @@ LOGS;
      * @test
      */
     public function when_one_test_is_failing_in_a_plain_text_file(): void {
-        $fixture = 'MultipleTests';
-
-        $this->runATestFile($fixture);
+        $this->runATestFile('MultipleTests');
 
         $expectedLogs = <<<LOGS
 FAILING
@@ -73,8 +67,7 @@ LOGS;
      */
     private function assertLogFileIs(string $expectedLogs): void
     {
-        $testRunLogsFile = __DIR__ . '/test_run_logs';
-        $testRunLogs = file_get_contents($testRunLogsFile);;
+        $testRunLogs = file_get_contents(__DIR__ . '/test_run_logs');;
         $this->assertEquals($expectedLogs, $testRunLogs);
     }
 }
