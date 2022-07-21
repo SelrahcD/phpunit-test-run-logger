@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Selrahcd\PhpunitTestRunLogger;
 
+use PHPUnit\Runner\AfterLastTestHook;
 use PHPUnit\Runner\AfterSuccessfulTestHook;
-use PHPUnit\Runner\AfterTestErrorHook;
 use PHPUnit\Runner\AfterTestFailureHook;
 
-final class TestRunLogger implements AfterSuccessfulTestHook, AfterTestFailureHook
+final class TestRunLogger implements AfterSuccessfulTestHook, AfterTestFailureHook, AfterLastTestHook
 {
+
+    private bool $hasFailingTest = false;
 
     public function executeAfterSuccessfulTest(string $test, float $time): void
     {
@@ -19,6 +21,14 @@ final class TestRunLogger implements AfterSuccessfulTestHook, AfterTestFailureHo
 
     public function executeAfterTestFailure(string $test, string $message, float $time): void
     {
+        $this->hasFailingTest = true;
         file_put_contents('test_run_logs', 'FAILING');
+    }
+
+    public function executeAfterLastTest(): void
+    {
+        $log = $this->hasFailingTest ? 'FAILING' : 'PASSING';
+
+        file_put_contents('test_run_logs', $log);
     }
 }

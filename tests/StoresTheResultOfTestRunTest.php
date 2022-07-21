@@ -26,6 +26,13 @@ class StoresTheResultOfTestRunTest extends TestCase
     }
 
     /**
+     * @test
+     */
+    public function when_one_test_is_failing_in_a_plain_text_file(): void {
+        $this->assertTheCorrectFileIsCreated('MultipleTests');
+    }
+
+    /**
      * @param string $fixture
      * @return void
      */
