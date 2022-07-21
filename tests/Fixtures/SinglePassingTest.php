@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Selrahcd\PhpunitTestRunLogger\SinglePassingTest;
+namespace Selrahcd\PhpunitTestRunLogger\Fixtures;
 
 use PHPUnit\Framework\TestCase;
 
-class SomeTest extends TestCase
+class SinglePassingTest extends TestCase
 {
 
     public function test_it_passes(): void

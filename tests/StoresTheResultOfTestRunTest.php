@@ -40,7 +40,7 @@ LOGS;
      * @test
      */
     public function when_one_test_is_failing_in_a_plain_text_file(): void {
-        $this->runATestFile('MultipleTests');
+        $this->runATestFile('MultipleTestsWithFailingTest');
 
         $expectedLogs = <<<LOGS
 FAILING
@@ -49,15 +49,14 @@ LOGS;
         $this->assertLogFileIs($expectedLogs);
     }
 
-
     /**
      * @param string $fixture
      * @return void
      */
-    private function runATestFile(string $fixture, string $testFile = 'SomeTest'): void
+    private function runATestFile(string $testFile): void
     {
         exec(
-            'cd ' . __DIR__ . ' && ' . self::PHPUNIT_BIN . ' -c phpunit-with-test-run-logger.xml fixtures/' . $fixture . '/' . $testFile . '.php'
+            'cd ' . __DIR__ . ' && ' . self::PHPUNIT_BIN . ' -c phpunit-with-test-run-logger.xml fixtures/'. $testFile . '.php'
         );
     }
 
