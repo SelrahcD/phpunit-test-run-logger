@@ -79,8 +79,7 @@ LOGS;
 
     private function runATestFile(string $testFile): void
     {
-        exec(
-            'cd ' . __DIR__ . ' && ' . self::PHPUNIT_BIN . ' -c phpunit-with-test-run-logger.xml fixtures/'. $testFile . '.php'
+        exec(self::PHPUNIT_BIN . ' -c ' . __DIR__ . '/phpunit-with-test-run-logger.xml ' . __DIR__ . '/fixtures/'. $testFile . '.php'
         , $out);
 
         var_dump($out);
