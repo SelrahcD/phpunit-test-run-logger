@@ -11,7 +11,13 @@ use PHPUnit\Runner\AfterTestFailureHook;
 final class TestRunLogger implements AfterSuccessfulTestHook, AfterTestFailureHook, AfterLastTestHook
 {
 
+
     private bool $hasFailingTest = false;
+
+    public function __construct()
+    {
+        $this->output = new TextFilePrinter();
+    }
 
     public function executeAfterSuccessfulTest(string $test, float $time): void
     {
@@ -29,6 +35,7 @@ final class TestRunLogger implements AfterSuccessfulTestHook, AfterTestFailureHo
 
         $date = new \DateTimeImmutable('now');
 
-        file_put_contents('test_run_logs', $log . ' - ' . $date->format('Y-m-d H:i:s') . PHP_EOL, FILE_APPEND);
+        $this->output->printTestRunLog($log, $date);
     }
+
 }
