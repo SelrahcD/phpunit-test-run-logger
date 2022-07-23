@@ -2,6 +2,7 @@
   "name": "selrahcd/phpunit-test-run-logger",
   "description": "A test run logger for PHPUnit. Records the results of test runs for improving TDD workflow.",
   "type": "library",
+  "license": "MIT",
   "require": {
     "php": "7.*|8.*",
     "phpunit/phpunit": "^9.5"
