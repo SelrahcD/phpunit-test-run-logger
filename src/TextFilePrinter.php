@@ -8,7 +8,7 @@ final class TextFilePrinter
 {
     private string $logFilePath;
 
-    public function __construct(string $logFilePath)
+    public function __construct(string $logFilePath = './test-run-logs.txt')
     {
         $this->logFilePath = $logFilePath;
     }
