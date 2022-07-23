@@ -39,7 +39,7 @@ LOGS;
         $this->runATestFile('SingleFailingTest');
 
         $expectedLogs = <<<LOGS
-FAILING
+❌ FAILING
 
 LOGS;
 ;
@@ -53,7 +53,7 @@ LOGS;
         $this->runATestFile('MultipleTestsWithFailingTest');
 
         $expectedLogs = <<<LOGS
-FAILING
+❌ FAILING
 
 LOGS;
 ;
@@ -72,7 +72,7 @@ LOGS;
         $expectedLogs = <<<LOGS
 ✅ PASSING
 ✅ PASSING
-FAILING
+❌ FAILING
 ✅ PASSING
 
 LOGS;
