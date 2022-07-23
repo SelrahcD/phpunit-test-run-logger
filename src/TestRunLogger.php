@@ -27,6 +27,8 @@ final class TestRunLogger implements AfterSuccessfulTestHook, AfterTestFailureHo
     {
         $log = $this->hasFailingTest ? '❌ FAILING' : '✅ PASSING';
 
-        file_put_contents('test_run_logs', $log . PHP_EOL, FILE_APPEND);
+        $date = new \DateTimeImmutable('now');
+
+        file_put_contents('test_run_logs', $log . ' - ' . $date->format('Y-m-d H:i:s') . PHP_EOL, FILE_APPEND);
     }
 }

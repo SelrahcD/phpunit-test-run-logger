@@ -26,7 +26,7 @@ class StoresTheResultOfTestRunTest extends TestCase
         $this->runATestFile('SinglePassingTest');
 
         $expectedLogs = <<<LOGS
-✅ PASSING
+✅ PASSING - \d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}
 
 LOGS;
         $this->assertLogFileIs($expectedLogs);
@@ -39,8 +39,7 @@ LOGS;
         $this->runATestFile('SingleFailingTest');
 
         $expectedLogs = <<<LOGS
-❌ FAILING
-
+❌ FAILING - \d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}
 LOGS;
 ;
         $this->assertLogFileIs($expectedLogs);
@@ -53,8 +52,7 @@ LOGS;
         $this->runATestFile('MultipleTestsWithFailingTest');
 
         $expectedLogs = <<<LOGS
-❌ FAILING
-
+❌ FAILING - \d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}
 LOGS;
 ;
         $this->assertLogFileIs($expectedLogs);
@@ -70,10 +68,10 @@ LOGS;
         $this->runATestFile('SinglePassingTest');
 
         $expectedLogs = <<<LOGS
-✅ PASSING
-✅ PASSING
-❌ FAILING
-✅ PASSING
+✅ PASSING - \d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}
+✅ PASSING - \d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}
+❌ FAILING - \d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}
+✅ PASSING - \d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}
 
 LOGS;
         ;
@@ -98,6 +96,6 @@ LOGS;
     private function assertLogFileIs(string $expectedLogs): void
     {
         $testRunLogs = file_get_contents(self::LOG_FILE);
-        $this->assertEquals($expectedLogs, $testRunLogs);
+        $this->assertMatchesRegularExpression("/" . $expectedLogs . "/", $testRunLogs);
     }
 }
