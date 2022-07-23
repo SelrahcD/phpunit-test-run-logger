@@ -4,7 +4,15 @@
 >
 
     <extensions>
-        <extension class="Selrahcd\PhpunitTestRunLogger\TestRunLogger" />
+        <extension class="Selrahcd\PhpunitTestRunLogger\TestRunLogger">
+            <arguments>
+                <object class="Selrahcd\PhpunitTestRunLogger\TextFilePrinter">
+                    <arguments>
+                        <string>/tmp/test-log-file</string>
+                    </arguments>
+                </object>
+            </arguments>
+        </extension>
     </extensions>
 
 

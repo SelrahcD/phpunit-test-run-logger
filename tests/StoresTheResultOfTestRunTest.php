@@ -8,10 +8,9 @@ use PHPUnit\Framework\TestCase;
 
 class StoresTheResultOfTestRunTest extends TestCase
 {
-
     const PHPUNIT_BIN = __DIR__ . '/../vendor/bin/phpunit';
 
-    const LOG_FILE = __DIR__ . '/test_run_logs';
+    const LOG_FILE = '/tmp/test-log-file';
 
     protected function tearDown(): void
     {
@@ -80,9 +79,10 @@ LOGS;
 
     private function runATestFile(string $testFile): void
     {
-        exec(
-            'cd ' . __DIR__ . ' && ' . self::PHPUNIT_BIN . ' -c phpunit-with-test-run-logger.xml fixtures/'. $testFile . '.php'
-        );
+        exec('pwd; ' . self::PHPUNIT_BIN . ' -c ' . __DIR__ . '/phpunit-with-test-run-logger.xml ' . __DIR__ . '/Fixtures/'. $testFile . '.php'
+        , $out);
+
+        var_dump($out);
     }
 
     private function assertLogFileIs(string $expectedLogs): void
