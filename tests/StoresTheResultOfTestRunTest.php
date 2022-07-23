@@ -26,7 +26,7 @@ class StoresTheResultOfTestRunTest extends TestCase
         $this->runATestFile('SinglePassingTest');
 
         $expectedLogs = <<<LOGS
-PASSING
+✅ PASSING
 
 LOGS;
         $this->assertLogFileIs($expectedLogs);
@@ -70,10 +70,10 @@ LOGS;
         $this->runATestFile('SinglePassingTest');
 
         $expectedLogs = <<<LOGS
-PASSING
-PASSING
+✅ PASSING
+✅ PASSING
 FAILING
-PASSING
+✅ PASSING
 
 LOGS;
         ;
