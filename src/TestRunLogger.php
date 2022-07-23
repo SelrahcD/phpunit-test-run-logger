@@ -5,37 +5,31 @@ declare(strict_types=1);
 namespace Selrahcd\PhpunitTestRunLogger;
 
 use PHPUnit\Runner\AfterLastTestHook;
-use PHPUnit\Runner\AfterSuccessfulTestHook;
 use PHPUnit\Runner\AfterTestFailureHook;
 
-final class TestRunLogger implements AfterSuccessfulTestHook, AfterTestFailureHook, AfterLastTestHook
+final class TestRunLogger implements AfterTestFailureHook, AfterLastTestHook
 {
-
-
-    private bool $hasFailingTest = false;
+    private TestRunLog $testRunLog;
+    private TextFilePrinter $output;
 
     public function __construct()
     {
         $this->output = new TextFilePrinter();
+        $this->testRunLog = new TestRunLog();
     }
-
-    public function executeAfterSuccessfulTest(string $test, float $time): void
-    {
-    }
-
 
     public function executeAfterTestFailure(string $test, string $message, float $time): void
     {
-        $this->hasFailingTest = true;
+        $this->testRunLog->logFailingTest();
     }
 
     public function executeAfterLastTest(): void
     {
-        $log = $this->hasFailingTest ? '❌ FAILING' : '✅ PASSING';
-
         $date = new \DateTimeImmutable('now');
 
-        $this->output->printTestRunLog($log, $date);
+        $this->testRunLog->testEndedOn($date);
+
+        $this->output->printTestRunLog($this->testRunLog);
     }
 
 }

@@ -78,10 +78,6 @@ LOGS;
         $this->assertLogFileIs($expectedLogs);
     }
 
-    /**
-     * @param string $fixture
-     * @return void
-     */
     private function runATestFile(string $testFile): void
     {
         exec(
@@ -89,13 +85,12 @@ LOGS;
         );
     }
 
-    /**
-     * @param string $expectedLogs
-     * @return void
-     */
     private function assertLogFileIs(string $expectedLogs): void
     {
         $testRunLogs = file_get_contents(self::LOG_FILE);
+
+        assert(is_string($testRunLogs));
+
         $this->assertMatchesRegularExpression("/" . $expectedLogs . "/", $testRunLogs);
     }
 }
