@@ -8,7 +8,7 @@ This is useful during a Dojo session, where you want to practice and reflect on 
 
 ## Install
 
-1. Install with composer `composer require selrahcd/phpunit-test-run-logger`
+1. Install with composer `composer require --dev selrahcd/phpunit-test-run-logger`
 
 2. Configure PHPUnit to use the extensions, in `phpunit.xml` add
 ```xml
