@@ -11,6 +11,14 @@ class StoresTheResultOfTestRunTest extends TestCase
 
     const PHPUNIT_BIN = __DIR__ . '/../vendor/bin/phpunit';
 
+    const LOG_FILE = __DIR__ . '/test_run_logs';
+
+    protected function tearDown(): void
+    {
+        unlink(self::LOG_FILE);
+    }
+
+
     /**
     * @test
     */
@@ -66,7 +74,7 @@ LOGS;
      */
     private function assertLogFileIs(string $expectedLogs): void
     {
-        $testRunLogs = file_get_contents(__DIR__ . '/test_run_logs');;
+        $testRunLogs = file_get_contents(self::LOG_FILE);
         $this->assertEquals($expectedLogs, $testRunLogs);
     }
 }
