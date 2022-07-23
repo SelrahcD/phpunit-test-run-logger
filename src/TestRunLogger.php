@@ -12,9 +12,9 @@ final class TestRunLogger implements AfterTestFailureHook, AfterLastTestHook
     private TestRunLog $testRunLog;
     private TextFilePrinter $output;
 
-    public function __construct()
+    public function __construct(TextFilePrinter $printer)
     {
-        $this->output = new TextFilePrinter();
+        $this->output = $printer;
         $this->testRunLog = new TestRunLog();
     }
 

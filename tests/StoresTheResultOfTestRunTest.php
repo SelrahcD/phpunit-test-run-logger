@@ -8,10 +8,9 @@ use PHPUnit\Framework\TestCase;
 
 class StoresTheResultOfTestRunTest extends TestCase
 {
-
     const PHPUNIT_BIN = __DIR__ . '/../vendor/bin/phpunit';
 
-    const LOG_FILE = __DIR__ . '/test_run_logs';
+    const LOG_FILE = '/tmp/test-log-file';
 
     protected function tearDown(): void
     {
