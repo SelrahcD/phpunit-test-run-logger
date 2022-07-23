@@ -27,6 +27,6 @@ final class TestRunLogger implements AfterSuccessfulTestHook, AfterTestFailureHo
     {
         $log = $this->hasFailingTest ? 'FAILING' : 'PASSING';
 
-        file_put_contents('test_run_logs', $log, FILE_APPEND);
+        file_put_contents('test_run_logs', $log . PHP_EOL, FILE_APPEND);
     }
 }

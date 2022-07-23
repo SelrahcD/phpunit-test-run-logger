@@ -27,6 +27,7 @@ class StoresTheResultOfTestRunTest extends TestCase
 
         $expectedLogs = <<<LOGS
 PASSING
+
 LOGS;
         $this->assertLogFileIs($expectedLogs);
     }
@@ -39,6 +40,7 @@ LOGS;
 
         $expectedLogs = <<<LOGS
 FAILING
+
 LOGS;
 ;
         $this->assertLogFileIs($expectedLogs);
@@ -52,8 +54,29 @@ LOGS;
 
         $expectedLogs = <<<LOGS
 FAILING
+
 LOGS;
 ;
+        $this->assertLogFileIs($expectedLogs);
+    }
+    
+    /**
+    * @test
+    */
+    public function with_multiple_test_runs(): void {
+        $this->runATestFile('SinglePassingTest');
+        $this->runATestFile('SinglePassingTest');
+        $this->runATestFile('SingleFailingTest');
+        $this->runATestFile('SinglePassingTest');
+
+        $expectedLogs = <<<LOGS
+PASSING
+PASSING
+FAILING
+PASSING
+
+LOGS;
+        ;
         $this->assertLogFileIs($expectedLogs);
     }
 
