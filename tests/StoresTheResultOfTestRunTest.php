@@ -79,10 +79,7 @@ LOGS;
 
     private function runATestFile(string $testFile): void
     {
-        exec('pwd; ' . self::PHPUNIT_BIN . ' -c ' . __DIR__ . '/phpunit-with-test-run-logger.xml ' . __DIR__ . '/Fixtures/'. $testFile . '.php'
-        , $out);
-
-        var_dump($out);
+        exec(self::PHPUNIT_BIN . ' -c ' . __DIR__ . '/phpunit-with-test-run-logger.xml ' . __DIR__ . '/Fixtures/'. $testFile . '.php');
     }
 
     private function assertLogFileIs(string $expectedLogs): void
