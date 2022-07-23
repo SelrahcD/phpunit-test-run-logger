@@ -81,7 +81,9 @@ LOGS;
     {
         exec(
             'cd ' . __DIR__ . ' && ' . self::PHPUNIT_BIN . ' -c phpunit-with-test-run-logger.xml fixtures/'. $testFile . '.php'
-        );
+        , $out);
+
+        var_dump($out);
     }
 
     private function assertLogFileIs(string $expectedLogs): void
